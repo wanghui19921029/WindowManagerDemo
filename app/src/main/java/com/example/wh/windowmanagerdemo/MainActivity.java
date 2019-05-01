@@ -8,7 +8,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 
@@ -16,6 +15,7 @@ import android.widget.Button;
 public class MainActivity extends Activity implements View.OnClickListener {
     private static final String TAG = "windowmanagerdemo--MainActivity";
     private Button mShowDialogBtn, mDismissDialogBtn, mShowWindowBtn, mDismissWindowBtn;
+    private SettingDialog mSettingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,14 +34,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
 
         requestPermission();
     }
-
-    @Override
-    public boolean dispatchTouchEvent(MotionEvent ev) {
-        Log.i(TAG, "dispatchTouchEvent: ");
-        return super.dispatchTouchEvent(ev);
-    }
-
-    private SettingDialog mSettingDialog;
 
     @Override
     public void onClick(View v) {
@@ -92,35 +84,5 @@ public class MainActivity extends Activity implements View.OnClickListener {
         if (requestCode == 1) {
             Log.i(TAG, "onActivityResult: ");
         }
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Log.i(TAG, "onStart: ");
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Log.i(TAG, "onResume: ");
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-        Log.i(TAG, "onPause: ");
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        Log.i(TAG, "onStop: ");
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        Log.i(TAG, "onDestroy: ");
     }
 }

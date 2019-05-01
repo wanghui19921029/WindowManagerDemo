@@ -5,6 +5,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.PixelFormat;
+import android.os.Build;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -44,9 +45,12 @@ public class WindowService extends Service {
         mLayoutParams.y = 560; // 偏移量
         // mLayoutParams.alpha = 0.6f; // 透明度
         mLayoutParams.format = PixelFormat.TRANSPARENT;
-        // 更多type：https://developer.android.com/reference/android/view/WindowManager.LayoutParams.html
-        // TYPE_SYSTEM_ALERT： 应用在后台运行时，window可以不消失
-        mLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        // 应用在后台运行时，window可以不消失
+        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.M) {
+            mLayoutParams.type = WindowManager.LayoutParams.TYPE_SYSTEM_ALERT;
+        } else {
+            mLayoutParams.type = WindowManager.LayoutParams.TYPE_APPLICATION_OVERLAY;
+        }
         // 更多falgs:https://developer.android.com/reference/android/view/WindowManager.LayoutParams.html
         mLayoutParams.flags = WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE
                 | WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED
